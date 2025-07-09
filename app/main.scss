@@ -5,12 +5,12 @@ $navside_width: 260px;
   --navbar_height: #{$navbar_height};
   --navside_width: #{$navside_width};
 }
+
 .content-width {
-  min-width: 100vw;
-  @media  (min-width:720px) {
-    min-width: calc(100vw - $navside_width - calc(2.25rem * 2));
+  display: flex;
+  align-items: center;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    height: 0;
   }
-}
-.content-width::-webkit-scrollbar {
-  height: 0;
 }

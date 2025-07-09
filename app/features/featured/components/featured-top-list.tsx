@@ -10,20 +10,20 @@ export default function FeaturedTopLists() {
     "Crypto",
     "Indonesia",
     "Penguna",
-    "Pndiikan",
-    "Live Streaming",
-    "Data",
-    "Podcasts",
-    "Leaderboard",
-    "VLogs",
-    "Music",
+   "MyPick",
+    "My Feed",
+    "Coding",
+    "Live",
+    "Crypto",
+    "Indonesia",
+    "Penguna",
   ];
   return (
-    <div className="content-width lg:mx-9 overflow-x-auto flex items-center justify-start mt-3 lg:mt-4">
+    <div className="content-width mt-2.5 gap-x-3">
       {cats.map((item,index) => {
         return (
           <Link
-            className={cn('px-4 py-1.5 text-gray-600 rounded-full text-xs mx-2 whitespace-nowrap',index == 0 ? "bg-black text-white font-semibold" : " bg-gray-100")}
+            className={cn('px-3 py-1.5 text-gray-600 rounded-full text-xs whitespace-nowrap',index == 0 ? "bg-black text-white font-semibold" : " bg-gray-100")}
             to={`?a=${item}`}
           >
             {item}

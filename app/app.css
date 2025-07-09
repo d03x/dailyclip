@@ -3,8 +3,3 @@
 @theme {
   --font-sans: "Inter", sans-serif;
 }
-
-html,
-body {
-  @apply bg-white dark:bg-gray-950;
-}
