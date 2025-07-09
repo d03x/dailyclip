@@ -6,6 +6,7 @@
   grid-template-columns: var(--navside_width) 1fr;
   .header {
     position: sticky;
+    z-index: 99999;
     border-bottom: 1px solid var(--color-gray-200);
     top: 0;
     grid-column: 1 / -1;

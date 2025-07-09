@@ -4,7 +4,7 @@ import {Divide as Hamburger} from "hamburger-react"
 import Logo from "./logo";
 const Navbar = () => {
   return (
-    <div className="lg:px-3 shadow-sm lg:shadow-none px-3 grid grid-cols-2 lg:grid-cols-3 items-center  w-full h-full bg-white">
+    <div className="lg:px-3  shadow-sm lg:shadow-none px-3 grid grid-cols-2 lg:grid-cols-3 items-center  w-full h-full bg-white">
       <div className="flex items-center">
         <Hamburger size={24}/>
         <span className="lg:text-2xl text-lg font-semibold">
