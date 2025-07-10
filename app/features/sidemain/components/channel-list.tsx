@@ -1,6 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { Flame, Radio } from "lucide-react";
 import { Link } from "react-router";
+import AvatarImage from "~/components/image/AvatarImage";
 import cn from "~/utils/cn";
 
 export default function ChannelLists() {
@@ -14,6 +15,7 @@ export default function ChannelLists() {
         const isLive = Math.random() < 0.2;
         return (
           <Link
+            key={index}
             to={"live"}
             className="mx-2 group/item relative   py-2 px-2 rounded-full flex justify-between hover:bg-gray-50"
           >
@@ -26,7 +28,7 @@ export default function ChannelLists() {
                     : "ring-1 ring-gray-200"
                 )}
               >
-                <img src={faker.image.avatar()} alt="" />
+                <AvatarImage src={faker.image.avatar()} alt="" />
               </div>
               <span className="text-sm group-[.is-active]:hidden line-clamp-1">
                 {faker.person.fullName()}

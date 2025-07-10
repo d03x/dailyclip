@@ -3,6 +3,7 @@
   max-width: 100%;
   display: grid;
   grid-template-rows: auto 1fr;
+  transition: all 200ms ease-in-out;
   grid-template-columns: var(--navside_width) 1fr;
   .header {
     position: sticky;
@@ -11,6 +12,19 @@
     top: 0;
     grid-column: 1 / -1;
     height: var(--navbar_height);
+  }
+
+  &.is_watching {
+    grid-template-columns: 1fr;
+  }
+  &.menu_active {
+    grid-template-columns: 80px 1fr;
+  }
+  @media screen and (max-width: 720px) {
+    grid-template-columns: 1fr;
+    &.menu_active {
+      grid-template-columns: 1fr;
+    }
   }
   .main {
   }

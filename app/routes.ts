@@ -10,6 +10,7 @@ export default [
     index("routes/login.tsx"),
     layout("routes/app-layout.tsx", [
       route("app", "routes/home.tsx"),
+      route("watch", 'routes/watch.tsx')
     ]),
   ]),
 ] satisfies RouteConfig;

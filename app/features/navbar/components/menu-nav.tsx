@@ -56,7 +56,7 @@ function MenuNav() {
             key={index}
             className={cn(
               "group-[.is-active]:gap-y-1.5",
-              "group-[.is-active]:flex-col flex-row  group-[.is-active]:text-center group-[.is-active]:text-[10px] flex text-sm hover:bg-gray-100 transition-all py-2 items-center px-2 rounded"
+              "group-[.is-active]:flex-col flex-row hover:text-danger  group-[.is-active]:text-center group-[.is-active]:text-[10px] flex text-sm hover:bg-gray-100 transition-all py-2 items-center px-2 rounded"
             )}
             to={"/"}
           >

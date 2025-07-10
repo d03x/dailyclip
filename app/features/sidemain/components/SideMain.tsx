@@ -4,9 +4,11 @@ import { MenuNav } from "~/features/navbar";
 import cn from "~/utils/cn";
 import { faker } from "@faker-js/faker";
 import ChannelLists from "./channel-list";
+import { useAppContext } from "~/contexts/AppContext";
 const SideMain = () => {
+  const {isMenuOpen} = useAppContext();
   return (
-    <aside className="group mt-3 select-none not-is-active">
+    <aside className={cn('group mt-3 select-none',isMenuOpen && 'is-active')}>
       <div className="px-2 mb-1.5">
         <MenuNav />
       </div>
