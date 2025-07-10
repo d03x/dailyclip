@@ -7,7 +7,7 @@ import cn from "~/utils/cn";
 export default function ChannelLists() {
   return (
     <div>
-      <div className="text-md mb-4   group-[.is-active]:text-xs group-[.is-active]:text-center flex items-center px-2">
+      <div className="text-md mb-4 font-semibold  group-[.is-active]:text-xs group-[.is-active]:text-center flex items-center px-2">
         <Flame className={cn("group-[.is-active]:hidden")} />
         <span>Top Channel</span>
       </div>

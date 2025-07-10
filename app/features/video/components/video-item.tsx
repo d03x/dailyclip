@@ -31,7 +31,7 @@ const VideoItem = () => {
       </div>
       <div className="space-y-2 mt-1.5">
         <div>
-          <p className="line-clamp-2 group-hover:text-red-600 whitespace-pre-wrap text-[16px] sm:text-title text-neutral-900 dark:text-white font-title-weight capitalize leading-title  -tracking-snug transition-colors duration-200">
+          <p className="line-clamp-2 font-semibold group-hover:text-red-600 whitespace-pre-wrap text-[14px] sm:text-title text-neutral-900 dark:text-white font-title-weight capitalize leading-title  -tracking-snug transition-colors duration-200">
             {faker.word.words(10)}
           </p>
         </div>

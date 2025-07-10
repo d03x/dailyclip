@@ -14,3 +14,7 @@ $navside_width: 260px;
     height: 0;
   }
 }
+
+.scrollbar-hide::-webkit-scrollbar{
+  display: none;
+}

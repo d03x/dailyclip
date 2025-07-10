@@ -4,7 +4,7 @@
   display: grid;
   grid-template-rows: auto 1fr;
   transition: all 200ms ease-in-out;
-  grid-template-columns: var(--navside_width) 1fr;
+  grid-template-columns: var(--navside_width) calc(100% - var(--navside_width));
   .header {
     position: sticky;
     z-index: 99999;
@@ -16,18 +16,20 @@
 
   &.is_watching {
     grid-template-columns: 1fr;
-  }
-  &.menu_active {
-    grid-template-columns: 80px 1fr;
-  }
-  @media screen and (max-width: 720px) {
-    grid-template-columns: 1fr;
     &.menu_active {
-      grid-template-columns: 1fr;
+      grid-template-columns: 100%;
     }
   }
-  .main {
+  &.menu_active {
+    grid-template-columns: 80px calc(100% - 80px);
   }
+  @media screen and (max-width: 720px) {
+    grid-template-columns: 100%;
+    &.menu_active {
+      grid-template-columns: 100%;
+    }
+  }
+
   .navSide {
     overflow-x: hidden;
     border-right: 1px solid var(--color-gray-300);
