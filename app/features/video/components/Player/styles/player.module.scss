@@ -1,0 +1,36 @@
+.indicator {
+  height: 0.2rem;
+  border-radius: 1rem;
+  position: relative;
+  backdrop-filter: blur(40px);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background-color: #8080804f;
+  .indicator_live,
+  .indicator_buffer {
+    height: 100%;
+    border-radius: 3rem;
+    position: absolute;
+    background: var(--color-danger);
+  }
+  .scrubber {
+    height: 1rem;
+    background-color: red;
+    border-radius: 100%;
+    position: absolute;
+    z-index: 2;
+    aspect-ratio: 1/1;
+    left: 0%;
+    width: 1rem;
+  }
+  .indicator_live {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    z-index: 1;
+  }
+  .indicator_buffer {
+    width: 0%;
+    background-color: rgb(95, 95, 95);
+  }
+}

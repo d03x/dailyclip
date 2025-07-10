@@ -5,100 +5,89 @@ import { NextIcon } from "./icons/Next";
 import { Volume } from "./icons/Volume";
 import { PauseIcon } from "./icons/PauseIcon";
 import cn from "~/utils/cn";
+import Controls from "./Controls";
+
+export type ControlsType = {
+  played: number;
+  playing: boolean;
+  muted: boolean;
+  volume: number;
+  formatedTime: string;
+  speed: number;
+  updatedTime: number;
+  seeking: boolean;
+  duration: number;
+  isFullScreen: boolean;
+  currentScruberWidth: number;
+};
 
 export const VideoPlayer = () => {
+  const video = "http://localhost:8080/vide.mp4";
   const videoRef = useRef<HTMLVideoElement>(null);
-  const btnPlay = useRef<HTMLButtonElement>(null);
-  const [duration, setDuration] = useState<number>(0);
-  const [isPlayed, setIsPlayed] = useState<boolean>(false);
-  const [currentTime, setCurrentTime] = useState<number>(0);
-  const [percentage, setPercentage] = useState<number>(0);
-    const [isScrubbing,setIsScribbing] = useState<boolean>(false)
-    const formatDuration = (duration : number)=>{
-        const current = videoRef.current?.currentTime as number;
-        setCurrentTime(current);
-        console.log(current,duration);
-        
-        return (current / duration) * 100;
-    }
 
-  function handleLoadedMetadata() {
-    setDuration(videoRef.current?.duration as number);
+  const [controls, setControls] = useState<ControlsType>({
+    played: 0,
+    playing: false,
+    muted: false,
+    formatedTime: "0:0:0",
+    volume: 0.5,
+    duration: 0,
+    updatedTime: 0,
+    currentScruberWidth: 0,
+    speed: 1,
+    seeking: false,
+    isFullScreen: false,
+  });
+
+  function loadMetadataHandler() {
+    setControls((prev) => ({
+      ...prev,
+      duration: videoRef.current?.duration ?? 0,
+    }));
   }
-  function handleTimeUpdate(e: Event) {
-    setPercentage( formatDuration(videoRef.current?.duration as number) )
-  }
-  function handleScrubbing(){
-        
-    if( videoRef.current ){
-        const rect = videoRef.current.getBoundingClientRect();
-        console.log(rect.x);
-        
-    }
-  }
+
   useLayoutEffect(() => {
-    if (videoRef.current) {
-      setIsPlayed(!videoRef.current.paused);
+    const current = videoRef.current;
+    if (current) {
+      setControls((prev) => ({
+        ...prev,
+        playing: !current.paused,
+      }));
+      current.addEventListener("loadeddata", loadMetadataHandler);
     }
-
-    videoRef.current?.addEventListener("timeupdate", handleTimeUpdate);
-    videoRef.current?.addEventListener("loadeddata", handleLoadedMetadata);
-
     return () => {
-      videoRef.current?.removeEventListener("timeupdate", handleTimeUpdate);
-      videoRef.current?.removeEventListener("loadeddata", handleLoadedMetadata);
+      current?.removeEventListener("loadeddata", loadMetadataHandler);
     };
   }, []);
-  const playHandler = () => {
-    const video = videoRef.current as HTMLVideoElement;
-    setIsPlayed(!isPlayed);
-    if (!isPlayed) {
-      video.play();
-    } else {
-      video.pause();
+
+  function handleProgress(e: any) {
+    if (!controls.seeking) {
+      setControls((prev) => ({
+        ...prev,
+        played: e.played,
+      }));
     }
-  };
-  useLayoutEffect(() => {
-    btnPlay.current?.addEventListener("click", playHandler);
-    return () => {
-      btnPlay.current?.removeEventListener("click", playHandler);
-    };
-  }, [videoRef, btnPlay, isPlayed]);
+  }
 
   return (
-    <div className="relative">
-      <Player
-        ref={videoRef}
-        height={"100%"}
-        width={"100%"}
-        src="http://localhost:8080/input.mp4"
-      />
-      <div className="absolute  inset-x-0 -bottom-3 rounded-lg overflow-hidden py-2 mb-2 px-3 bg-gradient-to-t from-black/60 to-transparent">
-        <div className="w-full cursor-pointer group flex">
-          <div className={cn('h-1 relative group-hover:h-1 flex items-center justify-center transition-all  bg-gradient-to-r from-primary from-70% to-danger  mb-2')} style={{
-            width : `${percentage}%`
-          }}>
-            <div onMouseDown={handleScrubbing} className="h-2 w-2 group-hover:scale-105 aspect-square right-0 absolute rounded-full bg-danger"></div>
-          </div>
-          <div className={cn('h-1 group-hover:h-1 transition-all  bg-gray-500/20 backdrop-blur-3xl  mb-2')} style={{
-            width : `${100 - percentage}%`
-          }}></div>
-        </div>
-        <div className="flex space-x-3 items-center">
-          <div className="text-white">
-            <NextIcon />
-          </div>
-          <button ref={btnPlay} className="text-white">
-            {!isPlayed ? <Play /> : <PauseIcon />}
-          </button>
-          <div className="text-white">
-            <NextIcon className="rotate-180" />
-          </div>
-          <div className="text-white">
-            <Volume />
-          </div>
-        </div>
+    <>
+      <div className="border-2 relative">
+        <Player
+          style={{ width: "100%", height: "100%" }}
+          muted={controls.muted}
+          onProgress={handleProgress}
+          ref={videoRef}
+          playing={controls.playing}
+          src={video}
+          autoPlay={false}
+          controls={false}
+        />
+        <Controls
+          videoRef={videoRef}
+          controls={controls}
+          setControls={setControls}
+        />
       </div>
-    </div>
+    </>
   );
 };
