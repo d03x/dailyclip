@@ -1,19 +1,17 @@
-import { useContext, useState, type ReactNode } from "react";
+import { useContext, useMemo, useState, type ReactNode } from "react";
 import { createContext } from "react";
 type AppContextType = {
   isWatchingPage: boolean;
-  isMenuOpen : boolean,
-  menuToggle : (val:boolean)=>void,
+  isMenuOpen: boolean;
+  menuToggle: (val: boolean) => void;
   setIsWatchingPage: (val: boolean) => void;
 };
 
 const contextValue: AppContextType = {
   isWatchingPage: false,
-  setIsWatchingPage(val) { },
+  setIsWatchingPage(val) {},
   isMenuOpen: false,
-  menuToggle: function (val: boolean): void {
-    
-  }
+  menuToggle: function (val: boolean): void {},
 };
 
 const AppContext = createContext<AppContextType>(contextValue);
@@ -28,15 +26,20 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
     setIsWatching(val);
   };
 
-  const menuToggle = (val : boolean)=>{
-      setIsMenuOpen(val);
-  }
+  const menuToggle = (val: boolean) => {
+    setIsMenuOpen(val);
+  };
 
-  return (
-    <AppContext.Provider value={{ isWatchingPage,isMenuOpen,menuToggle, setIsWatchingPage }}>
-      {children}
-    </AppContext.Provider>
-  );
+  const value = useMemo(() => {
+    return {
+      isWatchingPage,
+      isMenuOpen,
+      menuToggle,
+      setIsWatchingPage,
+    };
+  }, [isWatchingPage, isMenuOpen]);
+
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
 const useAppContext = () => {
