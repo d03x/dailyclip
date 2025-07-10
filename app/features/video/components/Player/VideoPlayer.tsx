@@ -22,7 +22,7 @@ export type ControlsType = {
 };
 
 export const VideoPlayer = () => {
-  const video = "http://localhost:8080/vide.mp4";
+  const video = "https://ik.imagekit.io/ikmedia/example_video.mp4";
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const [controls, setControls] = useState<ControlsType>({
